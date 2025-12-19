@@ -2,13 +2,15 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, Dumbbell } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Programs', href: '#programs' },
-  { name: 'Events', href: '#events' },
-  { name: 'Hall of Fame', href: '#hall-of-fame' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/#about' },
+  { name: 'Programs', href: '/#programs' },
+  { name: 'Events', href: '/#events' },
+  { name: 'Hall of Fame', href: '/#hall-of-fame' },
+  { name: 'Fitness Tracking', href: '/fitness-tracking' },
 ];
 
 export const Navbar = () => {
@@ -47,17 +49,38 @@ export const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => (
-              <motion.a
+              <motion.div
                 key={link.name}
-                href={link.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="text-gray-300 hover:text-white transition-colors relative group"
               >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyber-purple to-cyber-blue group-hover:w-full transition-all duration-300" />
-              </motion.a>
+                {link.href === '/' ? (
+                  <Link
+                    to={link.href}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyber-purple to-cyber-blue group-hover:w-full transition-all duration-300" />
+                  </Link>
+                ) : link.href.startsWith('/#') ? (
+                  <a
+                    href={link.href}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyber-purple to-cyber-blue group-hover:w-full transition-all duration-300" />
+                  </a>
+                ) : (
+                  <Link
+                    to={link.href}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyber-purple to-cyber-blue group-hover:w-full transition-all duration-300" />
+                  </Link>
+                )}
+              </motion.div>
             ))}
           </div>
 
@@ -66,9 +89,11 @@ export const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             className="hidden md:block"
           >
-            <Button href="#join" size="sm">
-              Join Now
-            </Button>
+            <Link to="/fitness-tracking">
+              <Button size="sm">
+                Track Fitness
+              </Button>
+            </Link>
           </motion.div>
 
           <button
@@ -89,18 +114,39 @@ export const Navbar = () => {
         >
           <div className="px-4 py-6 space-y-4">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block text-gray-300 hover:text-white transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
+              <div key={link.name}>
+                {link.href === '/' ? (
+                  <Link
+                    to={link.href}
+                    className="block text-gray-300 hover:text-white transition-colors py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ) : link.href.startsWith('/#') ? (
+                  <a
+                    href={link.href}
+                    className="block text-gray-300 hover:text-white transition-colors py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.href}
+                    className="block text-gray-300 hover:text-white transition-colors py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
             ))}
-            <Button href="#join" size="sm" className="w-full">
-              Join Now
-            </Button>
+            <Link to="/fitness-tracking" onClick={() => setMobileMenuOpen(false)}>
+              <Button size="sm" className="w-full">
+                Track Fitness
+              </Button>
+            </Link>
           </div>
         </motion.div>
       )}

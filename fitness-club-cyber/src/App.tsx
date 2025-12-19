@@ -1,23 +1,36 @@
 import { ParticlesBackground } from './components/ParticlesBackground';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { Hero, About, Programs, Events, HallOfFame, Join } from './components/sections';
+import { ChatBot } from './components';
+import { Hero, About, Programs, Events, HallOfFame, Join, FitnessTracking, FitnessTrackingLanding } from './components/sections';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="relative min-h-screen">
-      <ParticlesBackground />
-      <Navbar />
-      <main className="relative z-10">
-        <Hero />
-        <About />
-        <Programs />
-        <Events />
-        <HallOfFame />
-        <Join />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="relative min-h-screen">
+        <ParticlesBackground />
+        <Navbar />
+        <main className="relative z-10">
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <About />
+                <Programs />
+                <Events />
+                <HallOfFame />
+                <Join />
+                <FitnessTrackingLanding />
+              </>
+            } />
+            <Route path="/fitness-tracking" element={<FitnessTracking />} />
+          </Routes>
+        </main>
+        <Footer />
+        <ChatBot />
+      </div>
+    </Router>
   );
 }
 

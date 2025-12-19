@@ -4,3 +4,6 @@ export { Programs } from './Programs';
 export { Events } from './Events';
 export { HallOfFame } from './HallOfFame';
 export { Join } from './Join';
+export { FitnessTracking } from './FitnessTracking';
+export { FitnessTrackingLanding } from './FitnessTrackingLanding';
+export { AuthModal } from './AuthModal';

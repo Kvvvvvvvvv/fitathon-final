@@ -1,5 +1,6 @@
 import { Instagram, Mail, MessageCircle, ArrowRight } from 'lucide-react';
 import { Button, GlassCard, Section, SectionTitle } from '../ui';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -59,6 +60,16 @@ export const Join = () => {
             <Instagram className="w-5 h-5" />
             Follow on Instagram
           </Button>
+        </div>
+        
+        {/* New Fitness Tracking Button */}
+        <div className="mt-8">
+          <Link to="/fitness-tracking">
+            <Button size="lg" className="bg-gradient-to-r from-cyber-purple to-cyber-blue hover:shadow-[0_0_40px_rgba(139,92,246,0.6)]">
+              Track Your Fitness Journey
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
         </div>
       </div>
 
